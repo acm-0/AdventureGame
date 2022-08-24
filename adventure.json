@@ -1,0 +1,1329 @@
+{
+    "attributes" : {
+	"corporeality" : {
+	    "state" : "alive",
+	    "possible states" : "alive,dead"
+	},
+	"mylocation" : {
+	    "state" : "start",
+	    "possible states" : "start,treehouse southeast,treehouse northeast,treehouse southwest,treehouse northwest,secret room"
+	},
+	"dead body location" : {
+	    "state" : "start",
+	    "possible states" : "start,treehouse southeast,treehouse northeast,treehouse southwest,treehouse northwest,secret room"
+	}
+    },
+    "objects" : {
+	"golden key" : {
+	    "location" : "grue",
+	    "actions" : {
+		"take" : {
+		    "subroutine" : "take,golden key"
+		},
+		"drop" : {
+		    "subroutine" : "drop,golden key"
+		}
+	    }
+	},
+	"grue" : {
+	    "location" : "treehouse northwest",
+	    "actions" : {
+		"take" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "That is a very bad idea and is likely to get you killed"
+			    },
+			    "default" : {
+				"transition text" : "Being a ghost, you cannot touch the grue"
+			    }
+			}
+		    }
+		},
+		"sword" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"conditions" : {
+				    "sword" : {
+					"state" : {
+					    "new and shiny" : {
+						"transition text" : "You courageously attack the grue with the sword.  Unfortunately\nfor you, most of the grue's hide is like armor and your sword\ncauses no damage. The grue grabs the sword and using his immense\nstrength twists it into a U shape and throws it over the railing\nand out of the tree.  You might be able to find it down there",
+						"object change" : {
+						    "sword" : {
+							"state" : "bent",
+							"location" : "start"
+						    }
+						}
+					    },
+					    "bent" : {
+						"transition text" : "You somewhat foolhardedly attach the grue with the bent sword.\nIn a lucky and totally unplanned move the tip of the sword wraps\naround the leg of the grue and pricks him in the back of the\nknee.  This is a very sensitive area for the grue, and he gives\na howl and with a huge leap  disappears into the upper branches\nof the tree, unfortunately taking your sword with him. As he\nscrambles upward something falls from above and hits the floor\nwith a clang.  It turns out to be a golden key.",
+						"object change" : {
+						    "sword" : {
+							"location" : "Nowhere"
+						    },
+						    "golden key" : {
+							"location" : "treehouse northwest"
+						    },
+						    "grue" : {
+							"location" : "Nowhere"
+						    }
+						}
+					    }
+					}
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "Being a ghost, you cannot pick up the sword to use it"
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"scroll" : {
+	    "location" : "treehouse northwest",
+	    "times read" : "0",
+	    "actions" : {
+		"take" : {
+		    "subroutine" : "take,scroll"
+		},
+		"drop" : {
+		    "subroutine" : "drop,scroll"
+		},
+		"read" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"attributes" : {
+				    "mylocation" : {
+					"treehouse northeast" : {
+					    "conditions" : {
+						"scroll" : {
+						    "times read" : {
+							"0" : {
+							    "transition text" : "You open the scroll and read the mystic word\n\n       AURUM APERTA MAGA MANDATUM\n\n  Unfortunately nothing happens",
+							    "object change" : {
+								"scroll" : {
+								    "times read" : "1"
+								}
+							    }
+							},
+							"1" : {
+							    "transition text" : "You open the scroll and read the mystic words again, trying to sound authoritative\n\n      AURUM APERTA MAGA MANDATUM\n\n  The letters on the scroll begin to glow blue!",
+							    "object change" : {
+								"scroll" : {
+								    "times read" : "2"
+								}
+							    }
+							},
+							"2" : {
+							    "transition text" : "You open the scroll and read the mystic words a third time\n\n      AURUM APERTA MAGA MANDATUM\n\nThe scroll erupts into blue flame which burns brightly for a\nmoment and then disappears, leaving not even ashes of the scroll\nbehind.  At the same time you hear a loud Thunk sound. Looking\naround you notice that a keyhole has appeared in the front of\nthe chest that was not there before!",
+							    "object change" : {
+								"scroll" : {
+								    "times read" : "3",
+								    "location" : "Nowhere"
+								},
+								"chest" : {
+								    "state" : "locked"
+								}
+							    }
+							}
+						    }
+						}
+					    }
+					},
+					"default" : {
+					    "transition text" : "You open the scroll and read the mystic words\n\n      AURUM APERTA MAGA MANDATUM\n\n  Unfortunately nothing happens"
+					}
+				    }
+				}
+			    },
+			    "default" : {
+				"transition text" : "Being a ghost, you cannot unroll the scroll to read it"
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"sunglasses" : {
+	    "location" : "start",
+	    "state" : "not being worn",
+	    "possible states" : "being worn,not being worn",
+	    "actions" : {
+		"take" : {
+		    "subroutine" : "take,sunglasses"
+		},
+		"drop" : {
+		    "conditions" : {
+			"sunglasses" : {
+			    "location" : {
+				"inventory" : {
+				    "conditions" : {
+					"sunglasses" : {
+					    "state" : {
+						"being worn" : {
+						    "transition text" : "You cannot drop the sunglasses because you are wearing them"
+						},
+						"default" : {
+						    "transition text" : "You drop the sunglasses",
+						    "object change" : {
+							"sunglasses" : {
+							    "location" : "mylocation",
+							    "state" : "not being worn"
+							}
+						    }
+						}
+					    }
+					}
+				    }
+				},
+				"default" : {
+				    "transition text" : "You are not carrying sunglasses"
+				}
+			    }
+			}
+		    }
+		},
+		"wear" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"conditions" : {
+				    "sunglasses" : {
+					"state" : {
+					    "being worn" : {
+						"transition text" : "You are already wearing the sunglasses"
+					    },
+					    "default" : {
+						"transition text" : "You put on the sunglasses.  Everything seems much darker now",
+						"object change" : {
+						    "sunglasses" : {
+							"state" : "being worn",
+							"location" : "inventory"
+						    }
+						}
+					    }
+					}
+				    }
+				}
+			    },
+			    "default" : {
+				"transition text" : "Being a ghost, you cannot pick up the sunglasses"
+			    }
+			}
+		    }
+		},
+		"remove" : {
+		    "conditions" : {
+			"sunglasses" : {
+			    "state" : {
+				"being worn" : {
+				    "conditions" : {
+					"orb of light" : {
+					    "location" : {
+						"inventory" : {
+						    "transition text" : "You take off the sunglasses and put them in your pack.  Immediately\nyou are blinded by the rays from the Orb of Light, and you have\nto drop it",
+						    "object change" : {
+							"sunglasses" : {
+							    "state" : "not being worn"
+							},
+							"orb of light" : {
+							    "location" : "mylocation"
+							}
+						    }
+						},
+						"default" : {
+						    "transition text" : "You take off the sunglasses and put them in your pack",
+						    "object change" : {
+							"sunglasses" : {
+							    "state" : "not being worn"
+							}
+						    }
+						}
+					    }
+					}
+				    }
+				},
+				"default" : {
+				    "transition text" : "You are not wearing sunglasses at the moment"
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"flashlight" : {
+	    "location" : "treehouse southwest",
+	    "state" : "off",
+	    "possible states" : "off,on",
+	    "actions" : {
+		"take" : {
+		    "subroutine" : "take,flashlight"
+		},
+		"drop" : {
+		    "subroutine" : "drop,flashlight"
+		},
+		"turn on" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"attributes" : {
+				    "mylocation" : {
+					"treehouse northwest" : {
+					    "transition text" : "You turn on the flashlight.  Although no light appears to emerge,\nYou perceive a strange shimmering glow on the South wall of the\nroom, apparently stimulated by the flashlight's invisible beam. \nLooking more closely, you see the ghostly outline of a door in\nthe shimmering light. "
+					},
+					"default" : {
+					    "transition text" : "You turn on the flashlight.  A red LED above the switch lights\nup showing that the flashlight is on, but no light comes out.\nYou wonder if it is broken."
+					}
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "Being a ghost, you cannot grasp the slashlight to use it"
+			    }
+			}
+		    }
+		},
+		"turn off" : {
+		    "transition text" : "The flashlight is only on when the button is pushed, no need to turn it off"
+		}
+	    }
+	},
+	"orb of light" : {
+	    "location" : "chest",
+	    "actions" : {
+		"take" : {
+		    "conditions" : {
+			"orb of light" : {
+			    "location" : {
+				"inventory" : {
+				    "transition text" : "You are already carrying the Orb of Light"
+				},
+				"default" : {
+				    "conditions" : {
+					"chest" : {
+					    "state" : {
+						"open" : {
+						    "conditions" : {
+							"sunglasses" : {
+							    "state" : {
+								"being worn" : {
+								    "transition text" : "You pick up the Orb of Light, holding it carefully by its staff. \nGood thing you are wearing sunglasses, otherwise the light would\nbe too bright for your eyes",
+								    "object change" : {
+									"orb of light" : {
+									    "location" : "inventory"
+									}
+								    }
+								},
+								"default" : {
+								    "transition text" : "You attempt to pick up the Orb of Light but it is too bright\nto look at"
+								}
+							    }
+							}
+						    }
+						},
+						"default" : {
+						    "transition text" : "You see no such object here"
+						}
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		},
+		"drop" : {
+		    "subroutine" : "drop,orb of light"
+		}
+	    }
+	},
+	"chest" : {
+	    "state" : "sealed",
+	    "possible states" : "sealed,locked,unlocked,open",
+	    "location" : "treehouse northeast",
+	    "actions" : {
+		"take" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "The chest is too heavy to pick up, or even move"
+			    },
+			    "default" : {
+				"transition text" : "Being a ghost, you cannot touch the chest"
+			    }
+			}
+		    }
+		},
+		"open" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"conditions" : {
+				    "chest" : {
+					"state" : {
+					    "unlocked" : {
+						"transition text" : "With great effort you start to raise the lid of the chest.  As\nyou do so an intense light streams out from the interior.  With\nan increasing feeling of excitement you lift the lid the rest\nof the way.  Inside lies a polished wooden staff with a crystal\nball at the end, emanating light in every color imaginable. \nYou realize you have found the Orb of Light! Now if only you\ncan escape the treehouse with it...",
+						"object change" : {
+						    "chest" : {
+							"state" : "open"
+						    },
+						    "orb of light" : {
+							"location" : "treehouse northeast"
+						    }
+						}
+					    },
+					    "default" : {
+						"transition text" : "You try but are unable to open the chest.  You kick the chest\nin frustration because you feel certain there is something important\ninside, but you succeed only in hurting your toe. You now have\na sore toe"
+					    }
+					}
+				    }
+				}
+			    },
+			    "default" : {
+				"transition text" : "Being a ghost, you can't touch the chest"
+			    }
+			}
+		    }
+		},
+		"close" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"conditions" : {
+				    "chest" : {
+					"state" : {
+					    "open" : {
+						"conditions" : {
+						    "orb of light" : {
+							"location" : {
+							    "treehouse northeast" : {
+								"transition text" : "You close the chest carefully",
+								"object change" : {
+								    "chest" : {
+									"state" : "unlocked"
+								    },
+								    "orb of light" : {
+									"location" : "chest"
+								    }
+								}
+							    },
+							    "default" : {
+								"transition text" : "You close the chest carefully",
+								"object change" : {
+								    "chest" : {
+									"state" : "unlocked"
+								    }
+								}
+							    }
+							}
+						    }
+						}
+					    }
+					}
+				    }
+				}
+			    },
+			    "default" : {
+				"transition text" : "Being a ghost, you can't touch the chest"
+			    }
+			}
+		    }
+		},
+		"golden key" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"conditions" : {
+				    "chest" : {
+					"state" : {
+					    "locked" : {
+						"transition text" : "You try to insert the key into the keyhole on the chest.  It\nfits! You turn the key clockwise and hear the click that you\nhope is the sound of a lock unlocking ",
+						"object change" : {
+						    "chest" : {
+							"state" : "unlocked"
+						    }
+						}
+					    },
+					    "unlocked" : {
+						"transition text" : "You insert the key into the keyhole on the chest and turn the\nkey counterclockwise. The chest is now locked ",
+						"object change" : {
+						    "chest" : {
+							"state" : "locked"
+						    }
+						}
+					    },
+					    "open" : {
+						"transition text" : "With the lid raised you find it impossible to insert the key\nin the lock"
+					    },
+					    "sealed" : {
+						"transition text" : "You do not find any keyhole on the chest to insert the key into"
+					    }
+					}
+				    }
+				}
+			    },
+			    "default" : {
+				"transition text" : "Being a ghost, you can't touch the golden key"
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"sword" : {
+	    "location" : "treehouse southeast",
+	    "state" : "new and shiny",
+	    "actions" : {
+		"take" : {
+		    "subroutine" : "take,sword"
+		},		    
+		"drop" : {
+		    "subroutine" : "drop,sword"
+		}
+	    }
+	},
+	"trap door" : {
+	    "location" : "treehouse southeast",
+	    "actions" : {
+		"open" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "The trap door is now open",
+				"object change" : {
+				    "trap door" : {
+					"state" : "open"
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "You cannot touch the trap door, since you are a ghost"
+			    }
+			}
+		    }
+		},
+		"close" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "The trap door is now closed",
+				"object change" : {
+				    "trap door" : {
+					"state" : "closed"
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "You cannot touch the trap door, since you are a ghost"
+			    }
+			}
+		    }
+		}
+	    },
+	    "state" : "open",
+	    "possible states" : "open,closed"
+	},
+	"door" : {
+	    "state" : "locked",
+	    "location" : "treehouse northwest",
+	    "visibility" : "hidden",
+	    "actions" : {
+		"door key" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"attributes" : {
+				    "mylocation" : {
+					"treehouse northwest" : {
+					    "conditions" : {
+						"door" : {
+						    "state" : {
+							"unlocked" : {
+							    "transition text" : "The door is already unlocked"
+							},
+							"locked" : {
+							    "transition text" : "You try the door key on the door in the East wall.  The door\nis now unlocked",
+							    "object change" : {
+								"door" : {
+								    "state" : "unlocked"
+								}
+							    }
+							}
+						    }
+						}
+					    }
+					}
+				    }
+				}
+			    },
+			    "dead" : {
+				"attributes" : {
+				    "mylocation" : {
+					"treehouse northwest" : {
+					    "conditions" : {
+						"door" : {
+						    "state" : {
+							"unlocked" : {
+							    "transition text" : "Being a ghost you cannot grasp the door key to use it.\nHowever, you notice that the door is already unlocked"
+							},
+							"locked" : {
+							    "transition text" : "Being a ghost, you cannot grasp the door key to use it.\nThe door remains locked"
+							}
+						    }
+						}
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		},
+		"open" : {
+		    "attributes" : {
+			"corporeality": {
+			    "alive" : {
+				"conditions" : {
+				    "door" : {
+					"state" : {
+					    "locked" : {
+						"transition text" : "The door is locked"
+					    },
+					    "unlocked" : {
+						"transition text" : "The door is open"
+					    }
+					}
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "You cannot touch the door to open it"
+			    }
+			}
+		    }
+		},
+		"close" : {
+		    "attributes" : {
+			"corporeality": {
+			    "alive" : {
+				"conditions" : {
+				    "door" : {
+					"state" : {
+					    "locked" : {
+						"transition text" : "The door is already closed and locked"
+					    },
+					    "unlocked" : {
+						"transition text" : "The door is closed"
+					    }
+					}
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "You cannot touch the door to close it"
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"door key" : {
+	    "location" : "doormat",
+	    "actions" : {
+		"take" : {
+		    "subroutine" : "take,door key"
+		},
+		"drop" : {
+		    "subrouting" : "drop,door key"
+		}
+	    }
+	},
+	"doormat" : {
+	    "location" : "treehouse southeast",
+	    "actions" : {
+		"take" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"conditions" : {
+				    "door key" : {
+					"location" : {
+					    "doormat" : {
+						"transition text" : "You cannot take the doormat because it is attached to the floor. \nHowever you raise one corner and you see a door key hidden underneath,\nwhich you nudge out with your foot before lowering the doormat\nback into place",
+						"object change" : {
+						    "door key" : {
+							"location" : "mylocation"
+						    }
+						}
+					    },
+					    "default" : {
+						"transition text" : "You cannot take the doormat because it is attached to the floor. \nHowever you raise one corner and see underneath the mat.  There\nis nothing there"
+					    }
+					}
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "Being a ghost, you cannot move the doormat"
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"elixir of life" : {
+	    "location" : "treehouse northeast",
+	    "actions" : {
+		"drink" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "dead" : {
+				"transition text" : "You stick your tongue into the fountain of  elixir.  You feel\na curious sense of disorientation and solidity.  With a start\nyou realize you are back in your body - you are alive again!\nYou look around to see where you are",
+				"attribute change" : {
+				    "corporeality" : "alive",
+				    "mylocation" : "dead body location"}
+			    },
+			    "alive" : {
+				"transition text" : "You stick your tongue into the fountain of elixir.  It tasts\nlike peppermint.  Nothing else happens"
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"elixir of death" : {
+	    "location" : "treehouse southwest",
+	    "actions" : {
+		"drop" : {
+		    "conditions" : {
+			"elixir of death" : {
+			    "location" : {
+				"inventory" : {
+				    "transition text" : "You drop the elixir of death.  Fortunately the bottle doesn't break",
+				    "object change" : {
+					"elixir of death" : {
+					    "location" : "mylocation"
+					}
+				    }
+				},
+				"default" : {
+				    "transition text" : "You are not carrying the elixir of death"
+				}
+			    }
+			}
+		    }
+		},
+		"take" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "You pick up the small black bottle.  It is cold to the touch.",
+				"object change" : {
+				    "elixir of death" : {
+					"location" : "inventory"
+				    }
+				}
+			    },
+			    "dead" : {
+				"transition text" : "Being a ghost, you cannot pick up the bottle"
+			    }
+			}
+		    }
+		},
+		"drink" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "You tip up the bottle of elixir and an icy cold black liquid\ndrips into your mouth. Immediately a veil of darkness falls over\nyour eyes and you feel yourself losing consciousness. Some time\nlater your spirit arises from the floor and you realize you are\nnow a ghost. ",
+				"attribute change" : {
+				    "corporeality" : "dead",
+				    "dead body location" : "mylocation"
+				},
+				"custom function" : {
+				    "name" : "DropInventoryItems"
+				}
+			    },
+			    "dead" : {
+				"transition text" : "Since you are a ghost, you cannot grasp the elixir to drink it"
+			    }
+			}
+		    }
+		}
+	    }
+	}
+    },
+    "rooms" : {
+	"start" : {
+	    "number of visits" : "1",
+	    "description" : {
+		"conditions" : {
+		    "sunglasses" : {
+			"state" : {
+			    "being worn" : {
+				"conditions" : {
+				    "orb of light" : {
+					"location" : {
+					    "inventory" : {
+						"text" : "You are at the bottom of a tree.  There is a rope ladder extending\nupwards.  You cannot see what is at the top of the ladder. There\nis a sign here.  It reads\n\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n |           Welcome Intrepid Explorer             |\n |                                                 |\n | Somewhere above you will find the Orb of Light. |\n | Escape with it to fulfill your Quest.           |\n | Good luck, and don't get eaten by a grue.       |\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n "
+					    },
+					    "default" : {
+						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
+					    }
+					}
+				    }
+				}
+			    },
+			    "not being worn" : {
+				"text" : "You are at the bottom of a tree.  There is a rope ladder extending\nupwards.  You cannot see what is at the top of the ladder. There\nis a sign here.  It reads\n\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n |           Welcome Intrepid Explorer             |\n |                                                 |\n | Somewhere above you will find the Orb of Light. |\n | Escape with it to fulfill your Quest.           |\n | Good luck, and don't get eaten by a grue.       |\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n "
+			    }
+			}
+		    }
+		}
+	    },
+	    "directions" : {
+		"up" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition textstring" : "up the ladder",
+				"transition sound" : "upropeladder",
+				"attribute change" : {
+				    "mylocation" : "treehouse southeast"
+				},
+				"object change" : {
+				    "trap door" : {
+					"state" : "open"
+				    }
+				}
+			    },
+			    "dead" : {
+				"conditions" : {
+				    "trap door" : {
+					"state" : {
+					    "open" : {
+						"transition textstring" : "up the ladder",
+						"transition sound" : "upropeladder",
+						"attribute change" : {
+						    "mylocation" : "treehouse southeast"
+						}
+					    },
+					    "closed" : {
+						"transition text" : "You climb the ladder.  Soon you cannot see the ground below you.\nFinally the ladder ends at a trap door. Although the trap door\nis closed, being a ghost you float through and find yourself\nin a treehouse.",
+						"transition sound" : "upropeladder",
+						"attribute change" : {
+						    "mylocation" : "treehouse southeast"
+						}
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"treehouse southeast" : {
+	    "number of visits" : "0",
+	    "description" : {
+		"conditions" : {
+		    "sunglasses" : {
+			"state" : {
+			    "being worn" : {
+				"conditions" : {
+				    "orb of light" : {
+					"location" : {
+					    "inventory" : {
+						"textstring" : "treehouse southeast description"
+					    },
+					    "default" : {
+						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
+					    }
+					}
+				    }
+				}
+			    },
+			    "not being worn" : {
+				"textstring" : "treehouse southeast description"
+			    }
+			}	
+		    }
+		}
+	    },
+	    "directions": {
+		"down" : {
+		    "conditions" : {
+			"trap door" : {
+			    "state" : {
+				"open" : {
+				    "transition text" : "You carefully lower yourself through the trap door and climb\ndown the ladder to the bottom of the tree.",
+				    "attribute change" : {
+					"mylocation" : "start"
+				    }
+				},
+				"closed" : {
+				    "attributes" : {
+					"corporeality" : {
+					    "alive" : {
+						"transition text" : "You cannot go down because the trap door is closed"
+					    },
+					    "dead" : {
+						"transition text" : "Although the trap door is closed, being a ghost you pass right\nthrough it and float down the tree",
+						"attribute change" : {
+						    "mylocation" : "start"
+						}
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		},
+		"north" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "dead" : {
+				"conditions" : {
+				    "trap door" : {
+					"state" : {
+					    "open" : {
+						"transition text" : "You start to walk across the floor to the doorway in the North\nwall. Although the trap door is stil open, being a ghost you\nfloat right across it",
+						"attribute change" : {
+						    "mylocation" : "treehouse northeast"
+						}
+					    },
+					    "closed" : {
+						"transition text" : "You walk through the doorway in the North wall into the next room",
+						"attribute change" : {
+						    "mylocation" : "treehouse northeast"
+						}
+					    }
+					}
+				    }
+				}
+			    },
+			    "alive" : {
+				"conditions" : {
+				    "trap door" : {
+					"state" : {
+					    "open" : {
+						"transition text" : "You start to walk across the floor to the doorway in the North\nwall. Unfortunately you fall through the trap door that is still\nstanding open. You try to grab for the ladder but it is out of\nyour reach.  You crash to the ground. You are dead. Fortunately\nyour spirit arises as a ghost, and you can continue the quest.",
+					"attribute change" : {
+						    "mylocation" : "start",
+						    "corporeality" : "dead",
+						    "dead body location" : "start"
+						},
+						"custom function" : {
+						    "name" : "DropInventoryItems"
+						}
+					    },
+					    "closed" : {
+						"transition text" : "You walk through the doorway in the North wall into the next room",
+						"attribute change" : {
+						    "mylocation" : "treehouse northeast"
+						}
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		},
+		"west" : {
+		    "conditions" : {
+			"trap door" : {
+			    "state" :{
+				"open" : {
+				    "attributes" : {
+					"corporeality" : {
+					    "dead" : {
+						"transition text" : "You start to walk across the floor to the doorway in the West\nwall. Although the trap door is stil open, being a ghost you\nfloat right across it",
+						"attribute change" : {
+						    "mylocation" : "treehouse southwest"
+						}
+					    },
+					    "alive" : {
+						"transition text" : "You start to walk across the floor to the doorway in the West\nwall. Unfortunately you fall through the trap door that is still\nstanding open. You try to grab for the ladder but it is out of\nyour reach.  You crash to the ground. You are dead. Fortunately\nyour spirit arises as a ghost, and you can continue the quest.",
+					"attribute change" : {
+						    "mylocation" : "start",
+						    "corporeality" : "dead",
+						    "dead body location" : "start"
+						},
+						"custom function" : {
+						    "name" : "DropInventoryItems"
+						}
+					    }
+					}
+				    }
+				},
+				"closed" : {
+				    "transition text" : "You walk through the doorway in the West wall into the next room",
+				    "attribute change" : {
+					"mylocation" : "treehouse southwest"
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"treehouse northeast" : {
+	    "number of visits" : "0",
+	    "description" : {
+		"conditions" : {
+		    "sunglasses" : {
+			"state" : {
+			    "being worn" : {
+				"conditions" : {
+				    "orb of light" : {
+					"location" : {
+					    "inventory" : {
+						"conditions" : {
+						    "door" : {
+							"state" : {
+							    "locked" : {
+								"textstring" : "treehouse northeast description locked"
+							    },
+							    "unlocked" : {
+								"textstring" : "treehouse northeast description unlocked"
+							    }
+							}
+						    }
+						}
+					    },
+					    "default" : {
+						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
+					    }
+					}
+				    }
+				}
+			    },
+			    "not being worn" : {
+				"conditions" : {
+				    "door" : {
+					"state" : {
+					    "locked" : {
+						"textstring" : "treehouse northeast description locked"
+					    },
+					    "unlocked" : {
+						"textstring" : "treehouse northeast description unlocked"
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    },
+	   "directions" : {
+		"south" : {
+		    "attribute change" : {
+			"mylocation" : "treehouse southeast"
+		    },
+		    "object change" : {
+			"scroll" : {
+			    "times read" : "0"
+			}
+		    }
+		},
+		"west" : {
+		    "conditions" : {
+			"door" : {
+			    "state" : {
+				"locked" : {
+				    "attributes" : {
+					"corporeality" : {
+					    "alive" : {
+						"transition text" : "You do not see a door here"
+					    },
+					    "dead" : {
+						"transition text" : "Althugh there is no apparent door here, being a ghost you walk right through the wall",
+						"attribute change" : {
+						    "mylocation" : "treehouse northwest"
+						},
+						"object change" : {
+						    "scroll" : {
+							"times read" : "0"
+						    }
+						}
+					    }
+					}
+				    }
+				},
+				"unlocked" : {
+				    "transition text" : "You walk through the door in the west wall",
+				    "attribute change" : {
+					"mylocation" : "treehouse northwest"
+				    },
+				    "object change" : {
+					"scroll" : {
+					    "times read" : "0"
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	},
+	"treehouse southwest" : {
+	    "number of visits" : "0",
+	    "description" : {
+		"conditions" : {
+		    "sunglasses" : {
+			"state" : {
+			    "being worn" : {
+				"conditions" : {
+				    "orb of light" : {
+					"location" : {
+					    "inventory" : {
+						"textstring" : "treehouse southwest description"
+					    },
+					    "default" : {
+						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
+					    }
+					}
+				    }
+				}
+			    },
+			    "not being worn" : {
+				"textstring" : "treehouse southwest description"
+			    }
+			}
+		    }
+		}
+	    },
+	    "directions" : {
+		"up" : {
+		    "transition text" : "You reach up to grap the branches hanging overhead.  They seem\nstrong so you pull yourself up.  Now you can see over the wall\nto the North.  You see that there is another room.  As you consider\nwhether to climb down into this new room or go back, the branch\nbends under you, and you slide into the new room whether you\nwant to or not.",
+		    "attribute change" : {
+			"mylocation" : "treehouse northwest"
+		    }
+		},
+		"east" : {
+		    "attribute change" : {
+			"mylocation" : "treehouse southeast"
+		    }
+		}
+	    }
+	},
+	"secret room" : {
+	    "description" : {
+		"text" : "You are in a samll room the size of a closet.  The room is empty,\nbut there is writing on the wall.  A poem, it looks like.  Unfortunately\nthe last line has been smudged over time.  What you can see reads:\n\nIf you readeth me but once\nYou're no better than a dunce\nNor if you take my advice\nWilt thou stop at reading twice\nThe lesson hidden in these rhymes\nAlways erd ras clalthe moeri tes"
+	    },
+	    "directions" : {
+		"north" : {
+		    "transition text" : "You ease out through the same wall you came in by",
+		    "attribute change" : {
+			"mylocation" : "treehouse northwest"
+		    }
+		}
+	    }
+	},
+	"treehouse northwest" : {
+	    "number of visits" : "0",
+	    "description" : {
+		"conditions" : {
+		    "sunglasses" : {
+			"state" : {
+			    "being worn" : {
+				"conditions" : {
+				    "orb of light" : {
+					"location" : {
+					    "inventory" : {
+						"conditions" : {
+						    "grue" : {
+							"location" : {
+							    "treehouse northwest" : {
+								"textstring" : "treehouse northwest description grue"
+							    },
+							    "default" : {
+								"textstring" : "treehouse northwest description no grue"
+							    }
+							}
+						    }
+						}
+					    },
+					    "default" : {
+						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
+					    }
+					}
+				    }
+				}
+			    },
+			    "not being worn" : {
+				"conditions" : {
+				    "grue" : {
+					"location" : {
+					    "treehouse northwest" : {
+						"textstring" : "treehouse northwest description grue"
+					    },
+					    "default" : {
+						"textstring" : "treehouse northwest description no grue"
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    },
+	    "directions" : {
+		"north" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "You foolishly go too near the broken railing in the North of the\nroom.  It turns out the floor here is also broken.  You\nfall off the treehouse.  You are dead.  Fortunately your spirit\narises as a ghost, and you can continue the quest.",
+				"attribute change" : {
+				    "mylocation" : "start",
+				    "corporeality" : "dead"
+				},
+				"custom function" : {
+				    "name" : "DropInventoryItems"
+				}
+			    },
+			    "default" : {
+				"transition text" : "You walk over to inspect the North railing, which is broken. \nYou feel that the floor is not solid beneath you.  However, being\na ghost you do not fall"
+			    }
+			}
+		    }
+		},
+		"west" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "You foolishly go too near the broken railing in the West of the\nroom.  It turns out the floor here is also broken.  You\nfall off the treehouse.  You are dead.  Fortunately your spirit\narises as a ghost, and you can continue the quest.",
+				"attribute change" : {
+				    "mylocation" : "start",
+				    "corporeality" : "dead"
+				},
+				"custom function" : {
+				    "name" : "DropInventoryItems"
+				}
+			    },
+			    "default" : {
+				"transition text" : "You walk over to inspect the West railing, which is broken. \nYou feel that the floor is not solid beneath you.  However, being\na ghost you do not fall"
+			    }
+			}
+		    }
+		},
+		"east" : {
+		    "conditions" : {
+			"door" : {
+			    "state" : {
+				"locked" : {
+				    "attributes" : {
+					"corporeality" : {
+					    "alive" : {
+						"transition text" : "The door in the East wall is locked, you cannot open it"
+					    },
+					    "dead" : {
+						"transition text" : "The door in the East wall is locked, but being a ghost you walk\nthrough it anyway",
+						"attribute change" : {
+						    "mylocation" : "treehouse northeast"
+						}
+					    }
+					}
+				    }
+				},
+				"unlocked" : {
+				    "transition text" : "You open the door in the East wall and walk through",
+				    "attribute change" : {
+					"mylocation" : "treehouse northeast"
+				    }
+				}
+			    }
+			}
+		    }
+		},
+		"south" : {
+		    "attributes" : {
+			"corporeality" : {
+			    "alive" : {
+				"transition text" : "There is no door in the wall to the south, and you cannot climb\nover the wall"
+			    },
+			    "dead" : {
+				"transition text" : "Although there is no physical door, you manage to pass through\nthe wall via a spirit door accessible only to ghosts.  You find\nyourself inside a small closet-like room.",
+				"attribute change" : {
+				    "mylocation" : "secret room"
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+    },
+    "subroutines" : {
+	"take" : {
+	    "attributes" : {
+		"corporeality" : {
+		    "alive" : {
+			"conditions" : {
+			    "arg1" : {
+				"location" : {
+				    "inventory" : {
+					"transition text" : "You are already carrying the arg1"
+				    },
+				    "default" : {
+					"transition text" : "You take the arg1",
+					"transition sound" : "take",
+					"object change" : {
+					    "arg1" : {
+						"location" : "inventory"
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    },
+		    "default" : {
+			"transition text" : "Being a ghost, you cannot pick up the arg1"
+		    }
+		}
+	    }
+	},
+	"drop" : {
+	    "conditions" : {
+		"arg1" : {
+		    "location" : {
+			"inventory" : {
+			    "transition text" : "You drop the arg1",
+			    "transition sound" : "drop",
+			    "object change" : {
+				"arg1" : {
+				    "location" : "mylocation"
+				}
+			    }
+			},
+			"default" : {
+			    "transition text" : "You are not carrying a arg1"
+			}
+		    }
+		}
+	    }
+	}
+    },
+    "textstrings" : {
+	"treehouse southwest description" : "You are in the SouthWest corner of the treehouse.  The branches\nof the tree overhead cluster thickly here making the room quite\ndark. If you were in the mood you might be able to climb up into\nthem.  Looking over the railing to the south you see nothing\nbut mist. The partitions to the east and north are black in color.\nOn one wall a white skull and crossbones is painted.  There is an\narchway to the East, but the wall to the North shows no sign\nof a door.  ",
+	"up the ladder" : "You climb the ladder.  Soon you cannot see the ground below you.\nFinally the ladder ends at a trap door. You climb through the\ntrap door and find yourself in a treehouse.",
+	"treehouse southeast description" : "You are standing in the SoutEast corner of a large treehouse. \nNext to the trap door is a doormat with the word 'Beware!' wrtten\non it. There are no outer walls, just a railing to keep you from\nfalling.  However there are tall partitions that would be the\ninterior walls if this was a regular room.  There are archways\nin the North wall and the West wall.  ",
+	"treehouse northeast description locked" : "You are in the NorthEast corner of the treehouse. There is an\narchway to the South, and a wall to the West with no apparent door in it. In\nthe center of the room is a fountain with a cascade of some silvery\nliquid forever falling from a pitcher held by the hand of a marble\nstatue of Hebe into a basin below.  A sign next to the fountain\nreads \"Elixir of Life\". You also see in the corner an intricately\ncarved chest, made out of what appears to be solid gold",
+	"treehouse northeast description unlocked" : "You are in the NorthEast corner of the treehouse. There is an\narchway to the South, and a wall to the West with an unlocked door in it. In\nthe center of the room is a fountain with a cascade of some silvery\nliquid forever falling from a pitcher held by the hand of a marble\nstatue of Hebe into a basin below.  A sign next to the fountain\nreads \"Elixir of Life\". You also see in the corner an intricately\ncarved chest, made out of what appears to be solid gold",
+	"treehouse northwest description grue" : "You are in a room that looks like it could use some repairs.  Parts\nof the the railings on the North and West side are broken. \nYou make a mental note not to go near them or else you could\nfall through.  The walls to the East and South are dented, and\nthe floor is scratched up.  It looks like some fighting went\non in this room.  And the reason for the fighting is easy to\nsee.  In one corner of the room sits a fearsome grue.  He looks\nkind of like an ape, but with scales like a dinosaur, and he\nis orange.  He appears to be sleeping at the moment.  There is\na door in the East wall, but it appears to be locked.  The wall\nto the South shows no sign of a door",
+	"treehouse northwest description no grue" : "You are in a room that looks like it could use some repairs.  Parts\nof the the railings on the North and West side are broken. \nYou make a mental note not to go near them or else you could\nfall through.  The walls to the East and South are dented, and\nthe floor is scratched up.  It looks like some fighting went\non in this room.  There is a door in the East wall, but it appears\nto be locked.  The wall to the South shows no sign of a door"
+    }
+
+}
