@@ -5,7 +5,6 @@ import sys
 from os import system
 from os.path import exists
 from click import getchar
-from playsound import playsound
 
 class AdventureBaseClass :
 
@@ -32,6 +31,7 @@ class AdventureBaseClass :
     def UseSound(cls,tf) :
         if tf :
             cls.useSound = True
+            from playsound import playsound
         else :
             cls.useSound = False
         
