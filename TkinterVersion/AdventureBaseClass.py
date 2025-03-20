@@ -76,6 +76,13 @@ class AdventureBaseClass :
         return True
 
     @classmethod
+    def GetAllItems(cls):
+        itemList = list()
+        for item in cls.adventureDict['objects'].keys() :
+            itemList.append(item)
+        return itemList
+
+    @classmethod
     def FindItemsInLocation(cls,location):
         itemList = list()
         for item in cls.adventureDict['objects'].keys() :
@@ -117,6 +124,22 @@ class AdventureBaseClass :
                     print()
 
     @classmethod
+    def GetItemsHere(cls,mylocation) :
+        itemsHere = cls.FindItemsInLocation(mylocation)
+        itemlist = []
+        for item in itemsHere :
+            skip = False
+            if "visibility" in cls.adventureDict['objects'][item].keys() :
+                if cls.adventureDict['objects'][item]['visibility'] == "hidden" :
+                    skip = True
+            if not skip : 
+                mystr = f"There {cls.GetPlurality(item)} {cls.GetParticle(item)}{item} here."
+                if "state" in cls.adventureDict['objects'][item].keys() :
+                    mystr += f"  The {item} {cls.GetPlurality(item)} {cls.adventureDict['objects'][item]['state']}"
+                itemlist.append(mystr)
+        return itemlist
+
+    @classmethod
     def Inventory(cls) :
         itemsInInventory = cls.FindItemsInLocation("inventory")
         if len(itemsInInventory) == 0 :
@@ -126,7 +149,7 @@ class AdventureBaseClass :
             for item in itemsInInventory :
                 print(f'{cls.GetParticle(item)}{item}')
 
-# This is a recusrxive function to find and replace all the instances of 'arg1', 'arg2', etc in the condition tree of the
+# This is a recursive function to find and replace all the instances of 'arg1', 'arg2', etc in the condition tree of the
 # function with specific words from the calling location, e.g. 'take,key' will replace all values of 'arg1'. whether they be
 # keys or in a value text string, with 'key'
     @classmethod
@@ -508,6 +531,54 @@ class AdventureBaseClass :
             print(f'Invalid action list {action}')
             exit()
         return repeatLocationDescription
+
+# Function to get the current location
+    @classmethod
+    def GetLocation(cls) :
+        return cls.adventureDict['attributes']['mylocation']['state']
+
+# Function to get the current location description
+    @classmethod
+    def GetLocationDescription(cls) :
+        mylocation = cls.adventureDict['attributes']['mylocation']['state']
+        descriptionDict = cls.ParseConditionTree(cls.adventureDict['rooms'][mylocation]['description'])
+        if descriptionDict.get("text") :
+            return descriptionDict["text"]
+        elif descriptionDict.get("textstring") :
+            return cls.adventureDict["textstrings"][descriptionDict["textstring"]]
+        else :
+            return "Error - missing description"
+
+# Function to get the current location image
+    @classmethod
+    def GetLocationImage(cls) :
+        mylocation = cls.adventureDict['attributes']['mylocation']['state']        
+        return cls.adventureDict['rooms'][mylocation]['image']
+        
+# Function to get possible commands with item
+# This is a bit of a pain, because of the 'use <object1> on <object2>' command format.  For two word commands such as
+# 'drink elixir of life' or 'take sword' the allowable actions can be found under the 'objects' section of the dictionary.
+# But for 'use', you have to look under object2 to see if object1 has an entry, that is, object1 is treated as an action
+# that can be taken on object2.  So to see if 'use' is a possible command for an <objectx>, you have to check all objects
+# to see if <objectx> is listed.
+    @classmethod
+    def GetPossibleCommands(cls,item) :
+        allItems = cls.GetAllItems()
+        actions = []
+# The simple actions
+        for action in cls.adventureDict['objects'][item]['actions'].keys() :
+            if action == "drop":
+                if cls.adventureDict['objects'][item]['location'] == "inventory":
+                    actions.append(action)
+            elif action == "take":
+                if cls.adventureDict['objects'][item]['location'] == cls.GetLocation():
+                    actions.append(action)
+            else: actions.append(action)
+# The use-<object>-on-<object>
+        for checkItem in allItems:
+            if item in cls.adventureDict['objects'][checkItem]['actions'].keys() :
+                actions.append("use")
+        return actions
 
 # How to tell when the game is over
     @classmethod

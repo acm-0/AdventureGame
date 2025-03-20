@@ -5,12 +5,12 @@
 	    "possible states" : "alive,dead"
 	},
 	"mylocation" : {
-	    "state" : "start",
-	    "possible states" : "start,treehouse southeast,treehouse northeast,treehouse southwest,treehouse northwest,secret room"
+	    "state" : "Bottom of Tree",
+	    "possible states" : "Bottom of Tree,Treehouse Southeast,Treehouse Northeast,Treehouse SouthWest,Treehouse Northwest,secret room"
 	},
 	"dead body location" : {
-	    "state" : "start",
-	    "possible states" : "start,treehouse southeast,treehouse northeast,treehouse southwest,treehouse northwest,secret room"
+	    "state" : "Bottom of Tree",
+	    "possible states" : "Bottom of Tree,Treehouse Southeast,Treehouse Northeast,Treehouse SouthWest,Treehouse Northwest,secret room"
 	}
     },
     "objects" : {
@@ -26,7 +26,7 @@
 	    }
 	},
 	"grue" : {
-	    "location" : "treehouse northwest",
+	    "location" : "Treehouse Northwest",
 	    "actions" : {
 		"take" : {
 		    "attributes" : {
@@ -52,7 +52,7 @@
 						"object change" : {
 						    "sword" : {
 							"state" : "bent",
-							"location" : "start"
+							"location" : "Bottom of Tree"
 						    }
 						}
 					    },
@@ -63,7 +63,7 @@
 							"location" : "Nowhere"
 						    },
 						    "golden key" : {
-							"location" : "treehouse northwest"
+							"location" : "Treehouse Northwest"
 						    },
 						    "grue" : {
 							"location" : "Nowhere"
@@ -83,7 +83,7 @@
 	    }
 	},
 	"scroll" : {
-	    "location" : "treehouse northwest",
+	    "location" : "Treehouse Northwest",
 	    "times read" : "0",
 	    "actions" : {
 		"take" : {
@@ -98,7 +98,7 @@
 			    "alive" : {
 				"attributes" : {
 				    "mylocation" : {
-					"treehouse northeast" : {
+					"Treehouse Northeast" : {
 					    "conditions" : {
 						"scroll" : {
 						    "times read" : {
@@ -149,7 +149,7 @@
 	    }
 	},
 	"sunglasses" : {
-	    "location" : "start",
+	    "location" : "Bottom of Tree",
 	    "state" : "not being worn",
 	    "possible states" : "being worn,not being worn",
 	    "actions" : {
@@ -257,7 +257,7 @@
 	    }
 	},
 	"flashlight" : {
-	    "location" : "treehouse southwest",
+	    "location" : "Treehouse SouthWest",
 	    "state" : "off",
 	    "possible states" : "off,on",
 	    "actions" : {
@@ -273,7 +273,7 @@
 			    "alive" : {
 				"attributes" : {
 				    "mylocation" : {
-					"treehouse northwest" : {
+					"Treehouse Northwest" : {
 					    "transition text" : "You turn on the flashlight.  Although no light appears to emerge,\nYou perceive a strange shimmering glow on the South wall of the\nroom, apparently stimulated by the flashlight's invisible beam. \nLooking more closely, you see the ghostly outline of a door in\nthe shimmering light. "
 					},
 					"default" : {
@@ -345,7 +345,7 @@
 	"chest" : {
 	    "state" : "sealed",
 	    "possible states" : "sealed,locked,unlocked,open",
-	    "location" : "treehouse northeast",
+	    "location" : "Treehouse Northeast",
 	    "actions" : {
 		"take" : {
 		    "attributes" : {
@@ -373,7 +373,7 @@
 							"state" : "open"
 						    },
 						    "orb of light" : {
-							"location" : "treehouse northeast"
+							"location" : "Treehouse Northeast"
 						    }
 						}
 					    },
@@ -401,7 +401,7 @@
 						"conditions" : {
 						    "orb of light" : {
 							"location" : {
-							    "treehouse northeast" : {
+							    "Treehouse Northeast" : {
 								"transition text" : "You close the chest carefully",
 								"object change" : {
 								    "chest" : {
@@ -476,7 +476,7 @@
 	    }
 	},
 	"sword" : {
-	    "location" : "treehouse southeast",
+	    "location" : "Treehouse Southeast",
 	    "state" : "new and shiny",
 	    "actions" : {
 		"take" : {
@@ -488,7 +488,7 @@
 	    }
 	},
 	"trap door" : {
-	    "location" : "treehouse southeast",
+	    "location" : "Treehouse Southeast",
 	    "actions" : {
 		"open" : {
 		    "attributes" : {
@@ -530,7 +530,7 @@
 	},
 	"door" : {
 	    "state" : "locked",
-	    "location" : "treehouse northwest",
+	    "location" : "Treehouse Northwest",
 	    "visibility" : "hidden",
 	    "actions" : {
 		"door key" : {
@@ -539,7 +539,7 @@
 			    "alive" : {
 				"attributes" : {
 				    "mylocation" : {
-					"treehouse northwest" : {
+					"Treehouse Northwest" : {
 					    "conditions" : {
 						"door" : {
 						    "state" : {
@@ -564,7 +564,7 @@
 			    "dead" : {
 				"attributes" : {
 				    "mylocation" : {
-					"treehouse northwest" : {
+					"Treehouse Northwest" : {
 					    "conditions" : {
 						"door" : {
 						    "state" : {
@@ -644,7 +644,7 @@
 	    }
 	},
 	"doormat" : {
-	    "location" : "treehouse southeast",
+	    "location" : "Treehouse Southeast",
 	    "actions" : {
 		"take" : {
 		    "attributes" : {
@@ -677,7 +677,7 @@
 	    }
 	},
 	"elixir of life" : {
-	    "location" : "treehouse northeast",
+	    "location" : "Treehouse Northeast",
 	    "actions" : {
 		"drink" : {
 		    "attributes" : {
@@ -697,7 +697,7 @@
 	    }
 	},
 	"elixir of death" : {
-	    "location" : "treehouse southwest",
+	    "location" : "Treehouse SouthWest",
 	    "actions" : {
 		"drop" : {
 		    "conditions" : {
@@ -758,8 +758,9 @@
 	}
     },
     "rooms" : {
-	"start" : {
+	"Bottom of Tree" : {
 	    "number of visits" : "1",
+	    "image" : "RoomBot.png",
 	    "description" : {
 		"conditions" : {
 		    "sunglasses" : {
@@ -769,7 +770,7 @@
 				    "orb of light" : {
 					"location" : {
 					    "inventory" : {
-						"text" : "You are at the bottom of a tree.  There is a rope ladder extending\nupwards.  You cannot see what is at the top of the ladder. There\nis a sign here.  It reads\n\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n |           Welcome Intrepid Explorer             |\n |                                                 |\n | Somewhere above you will find the Orb of Light. |\n | Escape with it to fulfill your Quest.           |\n | Good luck, and don't get eaten by a grue.       |\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n "
+						"textstring" : "bottom of tree description"
 					    },
 					    "default" : {
 						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
@@ -779,7 +780,7 @@
 				}
 			    },
 			    "not being worn" : {
-				"text" : "You are at the bottom of a tree.  There is a rope ladder extending\nupwards.  You cannot see what is at the top of the ladder. There\nis a sign here.  It reads\n\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n |           Welcome Intrepid Explorer             |\n |                                                 |\n | Somewhere above you will find the Orb of Light. |\n | Escape with it to fulfill your Quest.           |\n | Good luck, and don't get eaten by a grue.       |\n - - - - - - - - - - - - - - - - - - - - - - - - - -\n "
+				"textstring" : "bottom of tree description"
 			    }
 			}
 		    }
@@ -793,7 +794,7 @@
 				"transition textstring" : "up the ladder",
 				"transition sound" : "upropeladder",
 				"attribute change" : {
-				    "mylocation" : "treehouse southeast"
+				    "mylocation" : "Treehouse Southeast"
 				},
 				"object change" : {
 				    "trap door" : {
@@ -809,14 +810,14 @@
 						"transition textstring" : "up the ladder",
 						"transition sound" : "upropeladder",
 						"attribute change" : {
-						    "mylocation" : "treehouse southeast"
+						    "mylocation" : "Treehouse Southeast"
 						}
 					    },
 					    "closed" : {
 						"transition text" : "You climb the ladder.  Soon you cannot see the ground below you.\nFinally the ladder ends at a trap door. Although the trap door\nis closed, being a ghost you float through and find yourself\nin a treehouse.",
 						"transition sound" : "upropeladder",
 						"attribute change" : {
-						    "mylocation" : "treehouse southeast"
+						    "mylocation" : "Treehouse Southeast"
 						}
 					    }
 					}
@@ -828,8 +829,9 @@
 		}
 	    }
 	},
-	"treehouse southeast" : {
+	"Treehouse Southeast" : {
 	    "number of visits" : "0",
+	    "image" : "RoomSE.png",
 	    "description" : {
 		"conditions" : {
 		    "sunglasses" : {
@@ -839,7 +841,7 @@
 				    "orb of light" : {
 					"location" : {
 					    "inventory" : {
-						"textstring" : "treehouse southeast description"
+						"textstring" : "Treehouse Southeast description"
 					    },
 					    "default" : {
 						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
@@ -849,7 +851,7 @@
 				}
 			    },
 			    "not being worn" : {
-				"textstring" : "treehouse southeast description"
+				"textstring" : "Treehouse Southeast description"
 			    }
 			}	
 		    }
@@ -863,7 +865,7 @@
 				"open" : {
 				    "transition text" : "You carefully lower yourself through the trap door and climb\ndown the ladder to the bottom of the tree.",
 				    "attribute change" : {
-					"mylocation" : "start"
+					"mylocation" : "Bottom of Tree"
 				    }
 				},
 				"closed" : {
@@ -875,7 +877,7 @@
 					    "dead" : {
 						"transition text" : "Although the trap door is closed, being a ghost you pass right\nthrough it and float down the tree",
 						"attribute change" : {
-						    "mylocation" : "start"
+						    "mylocation" : "Bottom of Tree"
 						}
 					    }
 					}
@@ -895,13 +897,13 @@
 					    "open" : {
 						"transition text" : "You start to walk across the floor to the doorway in the North\nwall. Although the trap door is stil open, being a ghost you\nfloat right across it",
 						"attribute change" : {
-						    "mylocation" : "treehouse northeast"
+						    "mylocation" : "Treehouse Northeast"
 						}
 					    },
 					    "closed" : {
 						"transition text" : "You walk through the doorway in the North wall into the next room",
 						"attribute change" : {
-						    "mylocation" : "treehouse northeast"
+						    "mylocation" : "Treehouse Northeast"
 						}
 					    }
 					}
@@ -915,9 +917,9 @@
 					    "open" : {
 						"transition text" : "You start to walk across the floor to the doorway in the North\nwall. Unfortunately you fall through the trap door that is still\nstanding open. You try to grab for the ladder but it is out of\nyour reach.  You crash to the ground. You are dead. Fortunately\nyour spirit arises as a ghost, and you can continue the quest.",
 					"attribute change" : {
-						    "mylocation" : "start",
+						    "mylocation" : "Bottom of Tree",
 						    "corporeality" : "dead",
-						    "dead body location" : "start"
+						    "dead body location" : "Bottom of Tree"
 						},
 						"custom function" : {
 						    "name" : "DropInventoryItems"
@@ -926,7 +928,7 @@
 					    "closed" : {
 						"transition text" : "You walk through the doorway in the North wall into the next room",
 						"attribute change" : {
-						    "mylocation" : "treehouse northeast"
+						    "mylocation" : "Treehouse Northeast"
 						}
 					    }
 					}
@@ -946,15 +948,15 @@
 					    "dead" : {
 						"transition text" : "You start to walk across the floor to the doorway in the West\nwall. Although the trap door is stil open, being a ghost you\nfloat right across it",
 						"attribute change" : {
-						    "mylocation" : "treehouse southwest"
+						    "mylocation" : "Treehouse SouthWest"
 						}
 					    },
 					    "alive" : {
 						"transition text" : "You start to walk across the floor to the doorway in the West\nwall. Unfortunately you fall through the trap door that is still\nstanding open. You try to grab for the ladder but it is out of\nyour reach.  You crash to the ground. You are dead. Fortunately\nyour spirit arises as a ghost, and you can continue the quest.",
 					"attribute change" : {
-						    "mylocation" : "start",
+						    "mylocation" : "Bottom of Tree",
 						    "corporeality" : "dead",
-						    "dead body location" : "start"
+						    "dead body location" : "Bottom of Tree"
 						},
 						"custom function" : {
 						    "name" : "DropInventoryItems"
@@ -966,7 +968,7 @@
 				"closed" : {
 				    "transition text" : "You walk through the doorway in the West wall into the next room",
 				    "attribute change" : {
-					"mylocation" : "treehouse southwest"
+					"mylocation" : "Treehouse SouthWest"
 				    }
 				}
 			    }
@@ -975,8 +977,9 @@
 		}
 	    }
 	},
-	"treehouse northeast" : {
+	"Treehouse Northeast" : {
 	    "number of visits" : "0",
+	    "image" : "RoomNE.png",
 	    "description" : {
 		"conditions" : {
 		    "sunglasses" : {
@@ -990,10 +993,10 @@
 						    "door" : {
 							"state" : {
 							    "locked" : {
-								"textstring" : "treehouse northeast description locked"
+								"textstring" : "Treehouse Northeast description locked"
 							    },
 							    "unlocked" : {
-								"textstring" : "treehouse northeast description unlocked"
+								"textstring" : "Treehouse Northeast description unlocked"
 							    }
 							}
 						    }
@@ -1011,10 +1014,10 @@
 				    "door" : {
 					"state" : {
 					    "locked" : {
-						"textstring" : "treehouse northeast description locked"
+						"textstring" : "Treehouse Northeast description locked"
 					    },
 					    "unlocked" : {
-						"textstring" : "treehouse northeast description unlocked"
+						"textstring" : "Treehouse Northeast description unlocked"
 					    }
 					}
 				    }
@@ -1027,7 +1030,7 @@
 	   "directions" : {
 		"south" : {
 		    "attribute change" : {
-			"mylocation" : "treehouse southeast"
+			"mylocation" : "Treehouse Southeast"
 		    },
 		    "object change" : {
 			"scroll" : {
@@ -1048,7 +1051,7 @@
 					    "dead" : {
 						"transition text" : "Althugh there is no apparent door here, being a ghost you walk right through the wall",
 						"attribute change" : {
-						    "mylocation" : "treehouse northwest"
+						    "mylocation" : "Treehouse Northwest"
 						},
 						"object change" : {
 						    "scroll" : {
@@ -1062,7 +1065,7 @@
 				"unlocked" : {
 				    "transition text" : "You walk through the door in the west wall",
 				    "attribute change" : {
-					"mylocation" : "treehouse northwest"
+					"mylocation" : "Treehouse Northwest"
 				    },
 				    "object change" : {
 					"scroll" : {
@@ -1076,8 +1079,9 @@
 		}
 	    }
 	},
-	"treehouse southwest" : {
+	"Treehouse SouthWest" : {
 	    "number of visits" : "0",
+	    "image" : "RoomSW",
 	    "description" : {
 		"conditions" : {
 		    "sunglasses" : {
@@ -1087,7 +1091,7 @@
 				    "orb of light" : {
 					"location" : {
 					    "inventory" : {
-						"textstring" : "treehouse southwest description"
+						"textstring" : "Treehouse SouthWest description"
 					    },
 					    "default" : {
 						"text" : "Because you are wearing the sunglasses you cannot see clearly where you are"
@@ -1097,7 +1101,7 @@
 				}
 			    },
 			    "not being worn" : {
-				"textstring" : "treehouse southwest description"
+				"textstring" : "Treehouse SouthWest description"
 			    }
 			}
 		    }
@@ -1107,17 +1111,18 @@
 		"up" : {
 		    "transition text" : "You reach up to grap the branches hanging overhead.  They seem\nstrong so you pull yourself up.  Now you can see over the wall\nto the North.  You see that there is another room.  As you consider\nwhether to climb down into this new room or go back, the branch\nbends under you, and you slide into the new room whether you\nwant to or not.",
 		    "attribute change" : {
-			"mylocation" : "treehouse northwest"
+			"mylocation" : "Treehouse Northwest"
 		    }
 		},
 		"east" : {
 		    "attribute change" : {
-			"mylocation" : "treehouse southeast"
+			"mylocation" : "Treehouse Southeast"
 		    }
 		}
 	    }
 	},
 	"secret room" : {
+	    "image" : "none",
 	    "description" : {
 		"text" : "You are in a samll room the size of a closet.  The room is empty,\nbut there is writing on the wall.  A poem, it looks like.  Unfortunately\nthe last line has been smudged over time.  What you can see reads:\n\nIf you readeth me but once\nYou're no better than a dunce\nNor if you take my advice\nWilt thou stop at reading twice\nThe lesson hidden in these rhymes\nAlways erd ras clalthe moeri tes"
 	    },
@@ -1125,13 +1130,14 @@
 		"north" : {
 		    "transition text" : "You ease out through the same wall you came in by",
 		    "attribute change" : {
-			"mylocation" : "treehouse northwest"
+			"mylocation" : "Treehouse Northwest"
 		    }
 		}
 	    }
 	},
-	"treehouse northwest" : {
+	"Treehouse Northwest" : {
 	    "number of visits" : "0",
+	    "image" : "RoomNW",
 	    "description" : {
 		"conditions" : {
 		    "sunglasses" : {
@@ -1144,11 +1150,11 @@
 						"conditions" : {
 						    "grue" : {
 							"location" : {
-							    "treehouse northwest" : {
-								"textstring" : "treehouse northwest description grue"
+							    "Treehouse Northwest" : {
+								"textstring" : "Treehouse Northwest description grue"
 							    },
 							    "default" : {
-								"textstring" : "treehouse northwest description no grue"
+								"textstring" : "Treehouse Northwest description no grue"
 							    }
 							}
 						    }
@@ -1165,11 +1171,11 @@
 				"conditions" : {
 				    "grue" : {
 					"location" : {
-					    "treehouse northwest" : {
-						"textstring" : "treehouse northwest description grue"
+					    "Treehouse Northwest" : {
+						"textstring" : "Treehouse Northwest description grue"
 					    },
 					    "default" : {
-						"textstring" : "treehouse northwest description no grue"
+						"textstring" : "Treehouse Northwest description no grue"
 					    }
 					}
 				    }
@@ -1186,7 +1192,7 @@
 			    "alive" : {
 				"transition text" : "You foolishly go too near the broken railing in the North of the\nroom.  It turns out the floor here is also broken.  You\nfall off the treehouse.  You are dead.  Fortunately your spirit\narises as a ghost, and you can continue the quest.",
 				"attribute change" : {
-				    "mylocation" : "start",
+				    "mylocation" : "Bottom of Tree",
 				    "corporeality" : "dead"
 				},
 				"custom function" : {
@@ -1205,7 +1211,7 @@
 			    "alive" : {
 				"transition text" : "You foolishly go too near the broken railing in the West of the\nroom.  It turns out the floor here is also broken.  You\nfall off the treehouse.  You are dead.  Fortunately your spirit\narises as a ghost, and you can continue the quest.",
 				"attribute change" : {
-				    "mylocation" : "start",
+				    "mylocation" : "Bottom of Tree",
 				    "corporeality" : "dead"
 				},
 				"custom function" : {
@@ -1231,7 +1237,7 @@
 					    "dead" : {
 						"transition text" : "The door in the East wall is locked, but being a ghost you walk\nthrough it anyway",
 						"attribute change" : {
-						    "mylocation" : "treehouse northeast"
+						    "mylocation" : "Treehouse Northeast"
 						}
 					    }
 					}
@@ -1240,7 +1246,7 @@
 				"unlocked" : {
 				    "transition text" : "You open the door in the East wall and walk through",
 				    "attribute change" : {
-					"mylocation" : "treehouse northeast"
+					"mylocation" : "Treehouse Northeast"
 				    }
 				}
 			    }
@@ -1317,13 +1323,14 @@
 	}
     },
     "textstrings" : {
-	"treehouse southwest description" : "You are in the SouthWest corner of the treehouse.  The branches\nof the tree overhead cluster thickly here making the room quite\ndark. If you were in the mood you might be able to climb up into\nthem.  Looking over the railing to the south you see nothing\nbut mist. The partitions to the east and north are black in color.\nOn one wall a white skull and crossbones is painted.  There is an\narchway to the East, but the wall to the North shows no sign\nof a door.  ",
+	"bottom of tree description": "You are at the bottom of a tree.  There is a rope ladder extending upwards.  You cannot see what is at the top of the ladder. There is a sign here.  It reads\n\n - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n |           Welcome Intrepid Explorer             \n |\n | Somewhere above you will find the Orb of Light. \n | Escape with it to fulfill your Quest.           \n | Good luck, and don't get eaten by a grue.       \n - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n ",
+	"Treehouse SouthWest description" : "You are in the SouthWest corner of the treehouse.  The branches\nof the tree overhead cluster thickly here making the room quite\ndark. If you were in the mood you might be able to climb up into\nthem.  Looking over the railing to the south you see nothing\nbut mist. The partitions to the east and north are black in color.\nOn one wall a white skull and crossbones is painted.  There is an\narchway to the East, but the wall to the North shows no sign\nof a door.  ",
 	"up the ladder" : "You climb the ladder.  Soon you cannot see the ground below you.\nFinally the ladder ends at a trap door. You climb through the\ntrap door and find yourself in a treehouse.",
-	"treehouse southeast description" : "You are standing in the SoutEast corner of a large treehouse. \nNext to the trap door is a doormat with the word 'Beware!' wrtten\non it. There are no outer walls, just a railing to keep you from\nfalling.  However there are tall partitions that would be the\ninterior walls if this was a regular room.  There are archways\nin the North wall and the West wall.  ",
-	"treehouse northeast description locked" : "You are in the NorthEast corner of the treehouse. There is an\narchway to the South, and a wall to the West with no apparent door in it. In\nthe center of the room is a fountain with a cascade of some silvery\nliquid forever falling from a pitcher held by the hand of a marble\nstatue of Hebe into a basin below.  A sign next to the fountain\nreads \"Elixir of Life\". You also see in the corner an intricately\ncarved chest, made out of what appears to be solid gold",
-	"treehouse northeast description unlocked" : "You are in the NorthEast corner of the treehouse. There is an\narchway to the South, and a wall to the West with an unlocked door in it. In\nthe center of the room is a fountain with a cascade of some silvery\nliquid forever falling from a pitcher held by the hand of a marble\nstatue of Hebe into a basin below.  A sign next to the fountain\nreads \"Elixir of Life\". You also see in the corner an intricately\ncarved chest, made out of what appears to be solid gold",
-	"treehouse northwest description grue" : "You are in a room that looks like it could use some repairs.  Parts\nof the the railings on the North and West side are broken. \nYou make a mental note not to go near them or else you could\nfall through.  The walls to the East and South are dented, and\nthe floor is scratched up.  It looks like some fighting went\non in this room.  And the reason for the fighting is easy to\nsee.  In one corner of the room sits a fearsome grue.  He looks\nkind of like an ape, but with scales like a dinosaur, and he\nis orange.  He appears to be sleeping at the moment.  There is\na door in the East wall, but it appears to be locked.  The wall\nto the South shows no sign of a door",
-	"treehouse northwest description no grue" : "You are in a room that looks like it could use some repairs.  Parts\nof the the railings on the North and West side are broken. \nYou make a mental note not to go near them or else you could\nfall through.  The walls to the East and South are dented, and\nthe floor is scratched up.  It looks like some fighting went\non in this room.  There is a door in the East wall, but it appears\nto be locked.  The wall to the South shows no sign of a door"
+	"Treehouse Southeast description" : "You are standing in the SoutEast corner of a large treehouse. \nNext to the trap door is a doormat with the word 'Beware!' wrtten\non it. There are no outer walls, just a railing to keep you from\nfalling.  However there are tall partitions that would be the\ninterior walls if this was a regular room.  There are archways\nin the North wall and the West wall.  ",
+	"Treehouse Northeast description locked" : "You are in the NorthEast corner of the treehouse. There is an\narchway to the South, and a wall to the West with no apparent door in it. In\nthe center of the room is a fountain with a cascade of some silvery\nliquid forever falling from a pitcher held by the hand of a marble\nstatue of Hebe into a basin below.  A sign next to the fountain\nreads \"Elixir of Life\". You also see in the corner an intricately\ncarved chest, made out of what appears to be solid gold",
+	"Treehouse Northeast description unlocked" : "You are in the NorthEast corner of the treehouse. There is an\narchway to the South, and a wall to the West with an unlocked door in it. In\nthe center of the room is a fountain with a cascade of some silvery\nliquid forever falling from a pitcher held by the hand of a marble\nstatue of Hebe into a basin below.  A sign next to the fountain\nreads \"Elixir of Life\". You also see in the corner an intricately\ncarved chest, made out of what appears to be solid gold",
+	"Treehouse Northwest description grue" : "You are in a room that looks like it could use some repairs.  Parts\nof the the railings on the North and West side are broken. \nYou make a mental note not to go near them or else you could\nfall through.  The walls to the East and South are dented, and\nthe floor is scratched up.  It looks like some fighting went\non in this room.  And the reason for the fighting is easy to\nsee.  In one corner of the room sits a fearsome grue.  He looks\nkind of like an ape, but with scales like a dinosaur, and he\nis orange.  He appears to be sleeping at the moment.  There is\na door in the East wall, but it appears to be locked.  The wall\nto the South shows no sign of a door",
+	"Treehouse Northwest description no grue" : "You are in a room that looks like it could use some repairs.  Parts\nof the the railings on the North and West side are broken. \nYou make a mental note not to go near them or else you could\nfall through.  The walls to the East and South are dented, and\nthe floor is scratched up.  It looks like some fighting went\non in this room.  There is a door in the East wall, but it appears\nto be locked.  The wall to the South shows no sign of a door"
     }
 
 }

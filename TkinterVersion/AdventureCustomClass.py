@@ -23,7 +23,7 @@ class AdventureCustomClass(AdventureBaseClass) :
                 
     @classmethod
     def SuccessCondition(cls) :
-        if cls.adventureDict['attributes']['mylocation']['state'] == "start" and cls.adventureDict['objects']['orb of light']['location'] == "inventory" :
+        if cls.adventureDict['attributes']['mylocation']['state'] == "Bottom of Tree" and cls.adventureDict['objects']['orb of light']['location'] == "inventory" :
             return True
         else :
             return False
