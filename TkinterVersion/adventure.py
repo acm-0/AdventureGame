@@ -112,7 +112,8 @@ def item_selected(event):
             break
       if item_found == "":
          pass # pop up an error box
-      UpdatePossibleCommands(item_found)
+      else:
+         UpdatePossibleCommands(item_found)
    return
 
 #############################################################################################
@@ -144,7 +145,7 @@ def UpdateLocationImage():
 #############################################################################################
 
 #########                                                                           #########
-#########        Function to update the list of items at the current location       #########
+######### Functions to update the list of items at current location or in inventory #########
 #########                                                                           #########
 def UpdateItemsHere():
     items = game.GetItemsHere(game.GetLocation())
@@ -152,6 +153,11 @@ def UpdateItemsHere():
     for item in items:
         items_here_listbox.insert(tk.END,item)
     
+def UpdateInventory():
+   items = game.GetInventory()
+   inventory_listbox.delete(0,tk.END)
+   for item in items:
+      inventory_listbox.insert(tk.END,item)
 
 #############################################################################################
 
@@ -159,21 +165,35 @@ def UpdateItemsHere():
 #########      Function to update the list of possible commands on an item          #########
 #########                                                                           #########
 def UpdatePossibleCommands(item):
+    global possible_commands_item, possible_commands_item_save
+
     possible_actions = game.GetPossibleCommands(item)
-    svarItem = tk.StringVar()
-    svarItem.set(item)
+    possible_commands_item.set("Possible commands with " + item + "...")
+    possible_commands_item_save.set("Possible commands with " + item + "...")
     for i in range(len(possible_actions)):
        if possible_actions[i] == "use":
           possible_actions[i] += " " + item + " on..."
        else:
           possible_actions[i] += " " + item
-    menu = possible_commands_optionmenu["menu"]
-    menu.delete(0, "end")
-    possible_commands_optionmenu.config(textvariable=svarItem)
+    menu = possible_commands_optionmenu['menu']
+    menu.delete(0, 'end')
+    possible_commands_optionmenu.config(textvariable=possible_commands_item)
     for option in possible_actions:
-        menu.add_command(label=option, command=tk._setit(possible_commands_options, option))
-   
+        menu.add_command(label=option, command=tk._setit(possible_commands_item, option, CommandSelected))
 
+#############################################################################################
+
+#########                                                                           #########
+#########        Function to enter a selected command on the command line           #########
+#########                                                                           #########
+def CommandSelected(command):
+    global possible_commands_item
+
+    action_entrybox.delete(0,tk.END)
+    action_entrybox.insert(tk.END,"Command: ")
+    action_entrybox.insert(tk.END,command)
+    possible_commands_item = possible_commands_item_save
+    possible_commands_optionmenu.config(textvariable=possible_commands_item)
 
 #############################################################################################
 
@@ -216,6 +236,7 @@ inventory_label.place(x=0,y=475,width=500,height=25)
 
 # The Inventory listbox (lower right corner of the GUI)
 inventory_listbox = tk.Listbox(frame) # ,listvariable=items)
+inventory_listbox.bind('<<ListboxSelect>>', item_selected)
 inventory_listbox.place(x=0,y=500,width=500,height=240)
 
 # Label for the Possible Commans optionmenu
@@ -224,9 +245,11 @@ possible_commands_label.place(x=0,y=740,width=500,height=30)
 
 # The Possible Commands optionmenu, with initial blank options
 possible_commands_item = tk.StringVar()
-possible_commands_item.set("...")
-possible_commands_options = [" "," "]
-possible_commands_optionmenu = tk.OptionMenu(frame,possible_commands_item,*(possible_commands_options))
+possible_commands_item.set("Possible commands with...")
+possible_commands_item_save = tk.StringVar()
+possible_commands_item_save.set("Possible commands with...")
+possible_commands_options = ["Option 1","Option 2"]
+possible_commands_optionmenu = tk.OptionMenu(frame, possible_commands_item, *possible_commands_options, command=CommandSelected)
 possible_commands_optionmenu.place(x=0,y=770,width=500,height=30)
 
 # Here we create a subframe to hold the command entry, command result, and buttons
@@ -281,6 +304,7 @@ UpdateLocationLabel()
 UpdateLocationText()
 UpdateLocationImage()
 UpdateItemsHere()
+UpdateInventory()
 
 # Launch the main game loop
 game.RunTheGame()
