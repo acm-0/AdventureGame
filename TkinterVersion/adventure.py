@@ -101,20 +101,27 @@ def ConfirmQuit():
 #########   Action when a items here or items carrying listbox item is selected     #########
 #########                                                                           #########
 def item_selected(event):
-   widget = event.widget
-   selection = widget.curselection()
-   if selection:
-      selected_item = widget.get(selection[0])   
-      item_found = ""
-      for item in all_items:
-         if item in selected_item:
-            item_found = item
-            break
-      if item_found == "":
-         pass # pop up an error box
-      else:
-         UpdatePossibleCommands(item_found)
-   return
+    global possible_commands_item, possible_commands_item_save
+    widget = event.widget
+    selection = widget.curselection()
+    if selection:
+       selected_item = widget.get(selection[0])   
+       print(selected_item)
+       item_found = ""
+       for item in all_items:
+          if item in selected_item:
+             item_found = item
+             break
+       if item_found == "":
+          possible_commands_item.set("Possible commands with...")
+          possible_commands_item_save.set("Possible commands with...")
+          possible_commands_optionmenu.config(textvariable=possible_commands_item)
+          menu = possible_commands_optionmenu['menu']
+          menu.delete(0, 'end')
+       else:
+          print("Hoo")
+          UpdatePossibleCommands(item_found)
+    return
 
 #############################################################################################
 
@@ -167,9 +174,9 @@ def UpdateInventory():
 def UpdatePossibleCommands(item):
     global possible_commands_item, possible_commands_item_save
 
-    possible_actions = game.GetPossibleCommands(item)
     possible_commands_item.set("Possible commands with " + item + "...")
     possible_commands_item_save.set("Possible commands with " + item + "...")
+    possible_actions = game.GetPossibleCommands(item)
     for i in range(len(possible_actions)):
        if possible_actions[i] == "use":
           possible_actions[i] += " " + item + " on..."
@@ -177,9 +184,12 @@ def UpdatePossibleCommands(item):
           possible_actions[i] += " " + item
     menu = possible_commands_optionmenu['menu']
     menu.delete(0, 'end')
-    possible_commands_optionmenu.config(textvariable=possible_commands_item)
+    print(possible_commands_item.get())
     for option in possible_actions:
         menu.add_command(label=option, command=tk._setit(possible_commands_item, option, CommandSelected))
+    print("Hi")
+#    possible_commands_optionmenu.config(textvariable=possible_commands_item)
+    print("Ho")
 
 #############################################################################################
 
@@ -192,8 +202,26 @@ def CommandSelected(command):
     action_entrybox.delete(0,tk.END)
     action_entrybox.insert(tk.END,"Command: ")
     action_entrybox.insert(tk.END,command)
-    possible_commands_item = possible_commands_item_save
+    possible_commands_item.set(possible_commands_item_save.get())
     possible_commands_optionmenu.config(textvariable=possible_commands_item)
+
+#############################################################################################
+
+#########                                                                           #########
+#########       Execute the Command in the Command Entry Window                     #########
+#########                                                                           #########
+def ExecuteCommand(event):
+   command = commandstr.get()
+   if command[0:9] == "Command: ":
+      command = command[9:]
+   print(command)
+   parseOK,action,actionFunc,actionWordCount,object1,object2 = game.ParseCommand(command)
+   repeatLocationDescription = game.ExecuteCommand(action,actionFunc,actionWordCount,object1,object2)
+   UpdateLocationLabel()
+   UpdateLocationText()
+   UpdateLocationImage()
+   UpdateItemsHere()
+   UpdateInventory()
 
 #############################################################################################
 
@@ -266,8 +294,10 @@ action_result_textbox = tk.Text(subframe, wrap="word",bd=3,relief="solid")
 action_result_textbox.place(x=0,y=25,width=400,height=315)
 
 # The Entry widget for entering your command.  We will always have "Command: " as the prompt
-action_entrybox = tk.Entry(subframe,font=myfont,bd=3,relief="solid")
+commandstr = tk.StringVar()
+action_entrybox = tk.Entry(subframe,textvariable=commandstr,font=myfont,bd=3,relief="solid")
 action_entrybox.place(x=0,y=340,width=400,height=30)
+action_entrybox.bind('<Return>', ExecuteCommand)
 action_entrybox.insert(tk.END,"Command: ")
 
 # Four buttons on the bottom middle of the GUI - Quit, Clear, Help, OK

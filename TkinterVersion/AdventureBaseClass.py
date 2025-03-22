@@ -137,19 +137,21 @@ class AdventureBaseClass :
                 if "state" in cls.adventureDict['objects'][item].keys() :
                     mystr += f"  The {item} {cls.GetPlurality(item)} {cls.adventureDict['objects'][item]['state']}"
                 itemlist.append(mystr)
+        if itemlist == []:
+            itemlist.append("<you see no items here>")
         return itemlist
 
     @classmethod
     def GetInventory(cls) :
         inventory = cls.FindItemsInLocation("inventory")
         itemlist = []
-        if inventory == []:
-            itemlist.append("<you are not carrying any items>")
-        else:
+        for item in inventory:
             mystr = item
             if "state" in cls.adventureDict['objects'][item].keys() :
                 mystr += f" - the {item} {cls.GetPlurality(item)} {cls.adventureDict['objects'][item]['state']}"
-            itemlist.append(mystr)
+                itemlist.append(mystr)
+        if itemlist == []:
+            itemlist.append("<you are not carrying any items>")
         return itemlist
 
     @classmethod
