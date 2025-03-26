@@ -11,6 +11,10 @@
 	"dead body location" : {
 	    "state" : "Bottom of Tree",
 	    "possible states" : "Bottom of Tree,Treehouse Southeast,Treehouse Northeast,Treehouse SouthWest,Treehouse Northwest,secret room"
+	},
+	"vision" : {
+	    "state" : "seeing",
+	    "possible states" : "seeing,blind"
 	}
     },
     "objects" : {
@@ -204,6 +208,9 @@
 							"state" : "being worn",
 							"location" : "inventory"
 						    }
+						},
+						"attribute change" : {
+						    "vision" : "blind"
 						}
 					    }
 					}
@@ -233,6 +240,9 @@
 							"orb of light" : {
 							    "location" : "mylocation"
 							}
+						    },
+						    "attribute change" : {
+							"vision" : "seeing"
 						    }
 						},
 						"default" : {
@@ -241,6 +251,9 @@
 							"sunglasses" : {
 							    "state" : "not being worn"
 							}
+						    },
+						    "attribute change" : {
+							"vision" : "seeing"
 						    }
 						}
 					    }
@@ -317,6 +330,9 @@
 									"orb of light" : {
 									    "location" : "inventory"
 									}
+								    },
+								    "attribute change" : {
+									"vision" : "seeing"
 								    }
 								},
 								"default" : {
@@ -639,7 +655,7 @@
 		    "subroutine" : "take,door key"
 		},
 		"drop" : {
-		    "subrouting" : "drop,door key"
+		    "subroutine" : "drop,door key"
 		}
 	    }
 	},
@@ -1029,6 +1045,7 @@
 	    },
 	   "directions" : {
 		"south" : {
+		    "transition text" : "You walk through the doorway in the South wall into the next room",
 		    "attribute change" : {
 			"mylocation" : "Treehouse Southeast"
 		    },
@@ -1081,7 +1098,7 @@
 	},
 	"Treehouse SouthWest" : {
 	    "number of visits" : "0",
-	    "image" : "RoomSW",
+	    "image" : "RoomSW.png",
 	    "description" : {
 		"conditions" : {
 		    "sunglasses" : {
@@ -1137,7 +1154,7 @@
 	},
 	"Treehouse Northwest" : {
 	    "number of visits" : "0",
-	    "image" : "RoomNW",
+	    "image" : "RoomNW.png",
 	    "description" : {
 		"conditions" : {
 		    "sunglasses" : {

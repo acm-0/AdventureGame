@@ -31,8 +31,17 @@ class AdventureCustomClass(AdventureBaseClass) :
     @classmethod
     def SuccessMessage(cls) :
         system('clear')
-        print("\n\n ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !")
-        print("\nCongratulations!  You have escaped with the Orb of Light!")
-        print("\nYour quest is complete, mighty adventurer!")
-        print("\n ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !")
-        print("\n\n\n\n\n\n\n")
+#        print("\n\n ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !")
+#        print("\nCongratulations!  You have escaped with the Orb of Light!")
+#        print("\nYour quest is complete, mighty adventurer!")
+#        print("\n ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !")
+#        print("\n\n\n\n\n\n\n")
+        returnMsg = '''
+Congratulations!  You have escaped with the Orb of Light!
+Your quest is complete, mighty adventurer!
+
+! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+'''
+        return returnMsg
+    
+        

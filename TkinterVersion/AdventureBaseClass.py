@@ -12,7 +12,7 @@ class AdventureBaseClass :
     soundsDir = "./sounds/"
     if sys.argv[0].rfind("/") != -1 :
         soundsDir = sys.argv[0][0:sys.argv[0].rfind("/")]+"/sounds/"
-    print(f'soundsDir={soundsDir}')
+#    print(f'soundsDir={soundsDir}')
 
     jsonFile = "adventure.json"
     if len(sys.argv) > 1 :
@@ -149,7 +149,7 @@ class AdventureBaseClass :
             mystr = item
             if "state" in cls.adventureDict['objects'][item].keys() :
                 mystr += f" - the {item} {cls.GetPlurality(item)} {cls.adventureDict['objects'][item]['state']}"
-                itemlist.append(mystr)
+            itemlist.append(mystr)
         if itemlist == []:
             itemlist.append("<you are not carrying any items>")
         return itemlist
@@ -270,14 +270,14 @@ class AdventureBaseClass :
     def UseObjectOnObject(cls,action,object1,object2) :
         mylocation = cls.adventureDict['attributes']['mylocation']['state']
         if (cls.adventureDict['objects'][object1]['location'] != mylocation) and (cls.adventureDict['objects'][object1]['location'] != "inventory") :
-            print(f'There {cls.GetPlurality(object1)} no {object1} here') # If there is such an object but it is not here nor in the inventory
-            return False
+            returnStr = "There " + cls.GetPlurality(object1) + " no " + object1 + " here" # If there is such an object but it is not here nor in the inventory
+            return returnStr
         if (cls.adventureDict['objects'][object2]['location'] != mylocation) and (cls.adventureDict['objects'][object2]['location'] != "inventory") :
-            print(f'There {cls.GetPlurality(object2)} no {object2} here') # If there is such an object but it is not here nor in the inventory
-            return False
+            returnStr = "There " + cls.GetPlurality(object2) + " no " + object2 + " here" # If there is such an object but it is not here nor in the inventory
+            return returnStr
         if object1 not in cls.adventureDict['objects'][object2]['actions'] :
-            print(f'You cannot use the {object1} on the {object2}')
-            return False
+            returnStr = "You cannot use the " + object1 + " on the " + object2
+            return returnStr
         else :
             return cls.ActionOnObject(object1,object2)
 
@@ -300,47 +300,56 @@ class AdventureBaseClass :
             if mylocation != cls.adventureDict['attributes']['mylocation']['state'] :
                 system('clear')
                 if movementSubDict.get('transition text') :
-                    print(movementSubDict['transition text'])
+                    returnStr = movementSubDict['transition text']
                 elif movementSubDict.get('transition textstring') :
-                    print(cls.adventureDict["textstrings"][movementSubDict['transition textstring']])
+                    returnStr = (cls.adventureDict["textstrings"][movementSubDict['transition textstring']])
+                else:
+                    returnStr = ""
                 mylocation = cls.adventureDict['attributes']['mylocation']['state']
                 if "number of visits" in cls.adventureDict['rooms'][mylocation] :
                     cls.adventureDict['rooms'][mylocation]['number of visits'] = cls.UpdateNumber(cls.adventureDict['rooms'][mylocation]['number of visits'],1)
 #                    print(f"number of visits = {cls.adventureDict['rooms'][mylocation]['number of visits']}")
-                return True # If as a result of the action we have moved to a different room, show the room description
+                return returnStr #True # If as a result of the action we have moved to a different room, show the room description
             else :
                 if movementSubDict.get('transition text'):
-                    print(movementSubDict['transition text'])
+                    returnStr = movementSubDict['transition text']
                 elif movementSubDict.get('transition textstring') :
-                    print(cls.adventureDict["textstrings"][movementSubDict['transition textstring']])
-                return False
+                    returnStr = cls.adventureDict["textstrings"][movementSubDict['transition textstring']]
+                return returnStr
         else: # The desired direction is not allowed from this room
-            print("You can't go in that direction")
-            return False
+            returnStr = "You can't go in that direction"
+            return returnStr
 
     @classmethod
     def ActionOnObject(cls,action,object):
         mylocation = cls.adventureDict['attributes']['mylocation']['state']
         if not cls.adventureDict['objects'].get(object) : # Check that there is such an object
             if action == "drop" :
-                print(f'You are not carrying {cls.GetParticle(object)}{object}')
+#                print(f'You are not carrying {cls.GetParticle(object)}{object}')
+                returnStr = "You are not carrying " + cls.GetParticle(object) + " " + object
             else :
-                print(f'There {cls.GetPlurality(object)} no {object} here')
+#                print(f'There {cls.GetPlurality(object)} no {object} here')
+                returnStr = "There " + cls.GetPlurality(object) + " no " + object + " here"
         elif (cls.adventureDict['objects'][object]['location'] != mylocation) and (cls.adventureDict['objects'][object]['location'] != "inventory") :
             if action == "drop" :
-                print(f'You are not carrying {cls.GetParticle(object)}{object}') # If there is such an object but it is not here nor in the inventory
+#                print(f'You are not carrying {cls.GetParticle(object)}{object}') # If there is such an object but it is not here nor in the inventory
+                returnStr = "You are not carrying " + cls.GetParticle(object) + " " + object
             else:
-                print(f'There {cls.GetPlurality(object)} no {object} here') # If there is such an object but it is not here nor in the inventory
+#                print(f'There {cls.GetPlurality(object)} no {object} here') # If there is such an object but it is not here nor in the inventory
+                returnStr = "There " + cls.GetPlurality(object) + " no " + object + " here"
         elif not cls.adventureDict['objects'][object]['actions'].get(action) :
-            print(f'You cannot {action} the {object}') # If the requested action is not defined for this object
+#            print(f'You cannot {action} the {object}') # If the requested action is not defined for this object
+            returnStr = "You cannot " + action + " the " + object
         else: # Valid action on valid object in valid location
             actionSubDict = cls.ParseConditionTree(cls.adventureDict['objects'][object]['actions'][action])
             if cls.useSound and actionSubDict.get('transition sound'):
                 playsound(cls.soundsDir+actionSubDict['transition sound']+".mp3",False)
             if actionSubDict.get('transition text') :
-                print(actionSubDict['transition text'])
+#                print(actionSubDict['transition text'])
+                returnStr = actionSubDict['transition text']
             elif actionSubDict.get('transition textstring') :
-                print(cls.adventureDict["textstrings"][actionSubDict['transition textstring']])
+#                print(cls.adventureDict["textstrings"][actionSubDict['transition textstring']])
+                returnStr = cls.adventureDict["textstrings"][actionSubDict['transition textstring']]
             if actionSubDict.get('attribute change') :
                 cls.UpdateAttributes(actionSubDict['attribute change'])
             if actionSubDict.get('object change') :
@@ -348,10 +357,12 @@ class AdventureBaseClass :
             if actionSubDict.get('custom function') :
                 cls.CustomFuncDispatch(actionSubDict['custom function']['name'])
         if mylocation != cls.adventureDict['attributes']['mylocation']['state'] :
-            return True # If as a result of the action we have moved to a different room, show the room description
+#            return True # If as a result of the action we have moved to a different room, show the room description
+            return returnStr
         else :
-            return False
-
+#            return False
+            return returnStr
+                
     @classmethod
     def getCommandsDict(cls) :
         commandsDict = {
@@ -568,7 +579,10 @@ class AdventureBaseClass :
     @classmethod
     def GetLocationImage(cls) :
         mylocation = cls.adventureDict['attributes']['mylocation']['state']        
-        return cls.adventureDict['rooms'][mylocation]['image']
+        if cls.adventureDict['attributes']['vision']['state'] == "seeing":
+            return cls.adventureDict['rooms'][mylocation]['image']
+        else:
+            return "none"
         
 # Function to get possible commands with item
 # This is a bit of a pain, because of the 'use <object1> on <object2>' command format.  For two word commands such as
@@ -588,11 +602,14 @@ class AdventureBaseClass :
             elif action == "take":
                 if cls.adventureDict['objects'][item]['location'] == cls.GetLocation():
                     actions.append(action)
+            elif action in allItems:
+                pass # For example, "golden key" is an action for "chest" but should not be listed
             else: actions.append(action)
 # The use-<object>-on-<object>
         for checkItem in allItems:
             if item in cls.adventureDict['objects'][checkItem]['actions'].keys() :
                 actions.append("use")
+                break
         return actions
 
 # How to tell when the game is over
