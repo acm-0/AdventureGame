@@ -758,7 +758,8 @@
 				"transition text" : "You tip up the bottle of elixir and an icy cold black liquid\ndrips into your mouth. Immediately a veil of darkness falls over\nyour eyes and you feel yourself losing consciousness. Some time\nlater your spirit arises from the floor and you realize you are\nnow a ghost. ",
 				"attribute change" : {
 				    "corporeality" : "dead",
-				    "dead body location" : "mylocation"
+				    "dead body location" : "mylocation",
+				    "vision" : "seeing"
 				},
 				"custom function" : {
 				    "name" : "DropInventoryItems"
@@ -932,10 +933,11 @@
 					"state" : {
 					    "open" : {
 						"transition text" : "You start to walk across the floor to the doorway in the North\nwall. Unfortunately you fall through the trap door that is still\nstanding open. You try to grab for the ladder but it is out of\nyour reach.  You crash to the ground. You are dead. Fortunately\nyour spirit arises as a ghost, and you can continue the quest.",
-					"attribute change" : {
+						"attribute change" : {
 						    "mylocation" : "Bottom of Tree",
 						    "corporeality" : "dead",
-						    "dead body location" : "Bottom of Tree"
+						    "dead body location" : "Bottom of Tree",
+						    "vision" : "seeing"
 						},
 						"custom function" : {
 						    "name" : "DropInventoryItems"
@@ -969,10 +971,11 @@
 					    },
 					    "alive" : {
 						"transition text" : "You start to walk across the floor to the doorway in the West\nwall. Unfortunately you fall through the trap door that is still\nstanding open. You try to grab for the ladder but it is out of\nyour reach.  You crash to the ground. You are dead. Fortunately\nyour spirit arises as a ghost, and you can continue the quest.",
-					"attribute change" : {
+						"attribute change" : {
 						    "mylocation" : "Bottom of Tree",
 						    "corporeality" : "dead",
-						    "dead body location" : "Bottom of Tree"
+						    "dead body location" : "Bottom of Tree",
+						    "vision" : "seeing"
 						},
 						"custom function" : {
 						    "name" : "DropInventoryItems"
@@ -1141,7 +1144,7 @@
 	"secret room" : {
 	    "image" : "none",
 	    "description" : {
-		"text" : "You are in a samll room the size of a closet.  The room is empty,\nbut there is writing on the wall.  A poem, it looks like.  Unfortunately\nthe last line has been smudged over time.  What you can see reads:\n\nIf you readeth me but once\nYou're no better than a dunce\nNor if you take my advice\nWilt thou stop at reading twice\nThe lesson hidden in these rhymes\nAlways erd ras clalthe moeri tes"
+		"text" : "You are in a small room the size of a closet.  The room is empty,\nbut there is writing on the wall.  A poem, it looks like.  Unfortunately\nthe last line has been smudged over time.  What you can see reads:\n\nIf you readeth me but once\nYou're no better than a dunce\nNor if you take my advice\nWilt thou stop at reading twice\nThe lesson hidden in these rhymes\nAlways erd ras clalthe moeri tes"
 	    },
 	    "directions" : {
 		"north" : {
@@ -1210,7 +1213,8 @@
 				"transition text" : "You foolishly go too near the broken railing in the North of the\nroom.  It turns out the floor here is also broken.  You\nfall off the treehouse.  You are dead.  Fortunately your spirit\narises as a ghost, and you can continue the quest.",
 				"attribute change" : {
 				    "mylocation" : "Bottom of Tree",
-				    "corporeality" : "dead"
+				    "corporeality" : "dead",
+				    "vision" : "seeing"
 				},
 				"custom function" : {
 				    "name" : "DropInventoryItems"
@@ -1229,7 +1233,8 @@
 				"transition text" : "You foolishly go too near the broken railing in the West of the\nroom.  It turns out the floor here is also broken.  You\nfall off the treehouse.  You are dead.  Fortunately your spirit\narises as a ghost, and you can continue the quest.",
 				"attribute change" : {
 				    "mylocation" : "Bottom of Tree",
-				    "corporeality" : "dead"
+				    "corporeality" : "dead",
+				    "vision" : "seeing"
 				},
 				"custom function" : {
 				    "name" : "DropInventoryItems"
