@@ -89,6 +89,14 @@ def ClearEntry():
     action_entrybox.delete(0,tk.END)
     action_entrybox.insert(tk.END,"Command: ")
 
+def HandleDelete(event=nullEvent):
+    command = commandstr.get()
+    if len(command) <= 9:
+       action_entrybox.insert(tk.END," ")
+    elif command[0:9] != "Command: ":
+       action_entrybox.insert(tk.END," ")
+    return
+
 #############################################################################################
 
 #########                                                                           #########
@@ -323,6 +331,7 @@ commandstr = tk.StringVar()
 action_entrybox = tk.Entry(subframe,textvariable=commandstr,font=myfont,bd=3,relief="solid")
 action_entrybox.place(x=0,y=240,width=500,height=30)
 action_entrybox.bind('<Return>', ExecuteCommand)
+action_entrybox.bind('<BackSpace>', HandleDelete)
 action_entrybox.insert(tk.END,"Command: ")
 
 # Four buttons on the bottom middle of the GUI - Quit, Clear, Help, OK
