@@ -165,8 +165,10 @@ def UpdateLocationImage():
 
 def UpdateCommandResultText(cmdresult):
     action_result_textbox.config(state="normal")
-    action_result_textbox.delete("1.0",tk.END)
+#    action_result_textbox.delete("1.0",tk.END)
+    action_result_textbox.insert(tk.END,"\n- - - - -\n")
     action_result_textbox.insert(tk.END,cmdresult)
+    action_result_textbox.yview_moveto(1.0)
     action_result_textbox.config(state="disabled")
 
 #############################################################################################
@@ -317,14 +319,23 @@ possible_commands_optionmenu.place(x=500,y=770,width=500,height=30)
 subframe = tk.Frame(frame,height=300,width=500,bg="white")
 subframe.place(x=0,y=500,height=300,width=500)
 
+# And we furthermore create a frame just for the command result window and associated scroll bar
+subframe2 = tk.Frame(subframe,height=240,width=500)
+subframe2.place(x=0,y=0,height=240,width=500)
+
 # Label for the Action Result textbox
-action_result_label = tk.Label(subframe,text="Command entry and result",bg=mylabel_color,bd=2,relief="solid")
-action_result_label.place(x=0,y=0,width=500,height=25)
+action_result_label = tk.Label(subframe2,text="Command entry and result",bg=mylabel_color,bd=2,relief="solid")
+action_result_label.pack(fill="x")
+
+# A scrollbar for the action result textbox
+action_result_scrollbar=tk.Scrollbar(subframe2, orient='vertical')
+action_result_scrollbar.pack(side=tk.RIGHT, fill='y')
 
 # The Action Result textbox (the lower middle of the GUI)
-action_result_textbox = tk.Text(subframe, wrap="word",bd=3,relief="solid",bg="white",takefocus=0,font=myfont)
-action_result_textbox.place(x=0,y=25,width=500,height=215)
+action_result_textbox = tk.Text(subframe2, wrap="word",bd=3,relief="solid",bg="white",takefocus=0,font=myfont,yscrollcommand=action_result_scrollbar.set)
+action_result_textbox.pack(side=tk.LEFT)
 action_result_textbox.config(state="disabled")
+action_result_scrollbar.config(command=action_result_textbox.yview)
 
 # The Entry widget for entering your command.  We will always have "Command: " as the prompt
 commandstr = tk.StringVar()
